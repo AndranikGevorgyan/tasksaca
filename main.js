@@ -2,24 +2,28 @@ const data = {
     A: 1,
     B: 2,
     C: {
-        E: 8,
+        Q: {
+            Z: 7
+        },
+        E: 8
     },
-    D: 4
+    D: 4,
+    L:{
+        F: 23
+    }
   }
- const swapObj = (obj) => {
-   let newObj;
-   newObj = Object.entries(obj).reduce((a, [k, v]) => ((a[v] = k), a), {});
-   for (let key in obj) {
-     if (typeof obj[key] === "object") {
-       newObj = Object.entries(obj).reduce((a, [k, v]) => ((a[k] = v), a), {});
-       obj[key] = Object.entries(obj[key]).reduce(
-         (a, [k, v]) => ((a[v] = k), a),
-         {}
-       );
-       newObj = Object.entries(obj).reduce((a, [k, v]) => ((a[k] = v), a), {});
-     }
-   }
-   console.log(newObj);
- };
+let array ={};
+function objSwap(obj,ret) {
+    for (let key in obj) {
+        if (typeof obj[key] === "object") {
+     ret[key] = {};
+            objSwap(obj[key], ret[key])
+        }else {
+            ret[obj[key]] = key
+        }
+    }
+    return ret
+}
+console.log(objSwap(data,array));
  
  
